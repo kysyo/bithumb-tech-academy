@@ -102,7 +102,7 @@ class AssignmentApplicationTests {
 		Flux<String> flux = Flux.just("google", "abc", "fb", "stackoverflow")
 				.filter(s-> s.length() >= 5)
 				.flatMap(s-> Flux.just(s.toUpperCase()))
-				.subscribeOn(Schedulers.parallel()) // 비동기처리
+				.publishOn(Schedulers.parallel())
 				.repeat(1) // 1번 반복
 				.log();
 
