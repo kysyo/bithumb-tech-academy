@@ -44,7 +44,7 @@ class AssignmentApplicationTests {
 	@Test
 	public void test3(){
 		Flux<String> flux = Flux.just("hello", "there")
-				.delayElements(Duration.ofSeconds(1)) // 순서를 맞추기위한 딜레이
+				.concatMap(Flux::just) // 순차적으로 처리 하기위해 concatMap 사용
 				.log();
 
 		StepVerifier.create(flux)
