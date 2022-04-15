@@ -6,7 +6,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 import java.time.Duration;
-import java.util.Observable;
 
 @SpringBootTest
 class AssignmentApplicationTests {
@@ -102,8 +101,8 @@ class AssignmentApplicationTests {
 	public void test6(){
 		Flux<String> flux = Flux.just("google", "abc", "fb", "stackoverflow")
 				.filter(s-> s.length() >= 5)
-				.publishOn(Schedulers.boundedElastic())
 				.flatMap(s-> Flux.just(s.toUpperCase()))
+				.publishOn(Schedulers.parallel())
 				.repeat(1) // 1번 반복
 				.log();
 
